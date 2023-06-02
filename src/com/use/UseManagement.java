@@ -10,7 +10,43 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class UseManagement {
-    public  void readUserFromAPI() throws  Exception{
+    public  void readUserFromAPI() throws Exception{
+        try {
+            String apiURL="https://jsonplaceholder.typicode.com/posts";
+            URL url=new URL(apiURL);
+
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader reader=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response=new StringBuilder();
+            String line;
+            while ((line= reader.readLine())!=null){
+                response.append(line);
+            }
+            reader.close();
+
+            Use use=new Use();
+            org.json.JSONArray jsonArray=new org.json.JSONArray(response.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                org.json.JSONObject product=(org.json.JSONObject)jsonArray.get(i);
+
+                use.setUserId(Integer.parseInt(product.get("userId").toString()));
+                use.setId(Integer.parseInt(product.get("id").toString()));
+                use.setTitle(product.get("title").toString());
+                use.setBody(product.get("body").toString());
+
+                System.out.println(use.toString());
+
+            }
+            conn.disconnect();
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+    public  void addUserFromAPI() throws  Exception{
         UseController useController=new UseController();
         try {
             String apiURL="https://jsonplaceholder.typicode.com/posts";
@@ -51,7 +87,7 @@ public class UseManagement {
 //                String title=product.get("title").toString();
 //                String body=product.get("body").toString();
 //
-////                System.out.println(userId+","+id+","+title+","+body);
+
 
             }
             conn.disconnect();

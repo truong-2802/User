@@ -8,6 +8,7 @@ public class MainClass {
         try {
             UseManagement useManagement=new UseManagement();
             useManagement.readUserFromAPI();
+//            useManagement.addUserFromAPI();
         }catch (Exception e ){
             System.out.println(e.getMessage());
 
