@@ -32,17 +32,20 @@ public class UseManagement {
             org.json.JSONArray jsonArray=new org.json.JSONArray(response.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 org.json.JSONObject product=(org.json.JSONObject)jsonArray.get(i);
-
+// add database
                 Post newPost = new Post(
                         Integer.parseInt(product.get("id").toString()),
                         Integer.parseInt(product.get("userId").toString()),
                         product.get("title").toString(),
                         product.get("body").toString()
-
                 );
 
                 System.out.println("Inserting.......");
                 useController.insertNewPost(newPost);
+
+                 
+                //đọc json
+
 //                int userId=Integer.parseInt(product.get("userId").toString());
 //                int id=Integer.parseInt(product.get("id").toString());
 //                String title=product.get("title").toString();
