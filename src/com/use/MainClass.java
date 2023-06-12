@@ -7,8 +7,8 @@ public class MainClass {
     public static void main(String[] args) {
         try {
             UseManagement useManagement=new UseManagement();
-            useManagement.readUserFromAPI();
-//            useManagement.addUserFromAPI();
+//            useManagement.readUserFromAPI();
+            useManagement.addUserFromAPI();
         }catch (Exception e ){
             System.out.println(e.getMessage());
 
